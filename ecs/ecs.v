@@ -7,7 +7,6 @@ pub mut:
         component_type int
         data           map[string]f64
         metadata       map[string]string
-        // would be great to aggregate this
 }
 
 pub fn (mut c Component) create_component(component_type int, data map[string]f64, metadata map[string]string) Component {
