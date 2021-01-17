@@ -56,9 +56,9 @@ mut:
 
 pub fn (mut s System) run(name string, function fn(), components []Component, data map[string]f64, metadata map[string]string) {
 
-		/* Systems are substantially side-effects functions. Query for all the entities sharing the array of components */
-		
-		/* System actions on the world context given the function */ 
-		/* Note: should be channeled <- or should be always in concurrency */
-		function()
+        /* Systems are substantially side-effects functions. Query for all the entities sharing the array of components */
+        
+        /* System actions on the world context given the function */ 
+        /* Note: should be channeled <- or should be always in concurrency */
+        function()
 }

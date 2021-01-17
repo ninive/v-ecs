@@ -30,7 +30,7 @@ fn (mut app App) context() {
 	mut rr1 := app.c.create_component(rectangle, {'width':f64(64),'height':f64(32)}, {'':''})
 	mut cc1 := app.c.create_component(circle, {'radius':f64(5)}, {'':''})
 	mut pos1 := app.c.create_component(position, {'x':f64(64),'y':f64(32)}, {'':''})
-	mut avatar := app.c.create_component(imagesrc, {'x':f64(0),'y':f64(0)}, {'src':'./avatar.png'})
+	mut avatar := app.c.create_component(imagesrc, {'width':f64(64),'height':f64(64)}, {'src':'./avatar.png'})
 	mut idy1 := app.c.create_component(identity, {'':f64(0)}, {'name': 'Ninive', 'type': 'player'})
 
 	app.entities = []ecs.Entity{}
