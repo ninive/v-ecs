@@ -4,13 +4,12 @@ import rand
 
 pub struct Component {
 pub mut:
-        component_type int
         data           map[string]f64
         metadata       map[string]string
 }
 
-pub fn (mut c Component) create_component(component_type int, data map[string]f64, metadata map[string]string) Component {
-        mut component := Component{component_type, data, metadata}
+pub fn (mut c Component) create_component(data map[string]f64, metadata map[string]string) Component {
+        mut component := Component{data, metadata}
         return component
 }
 
@@ -48,7 +47,7 @@ pub fn (mut e Entity) get_component(component Component) Component {
 pub struct System {
 mut:
         name       string
-        function   fn ()
+        function   fn()
         components []Component
         data       map[string]f64
         metadata   map[string]string
