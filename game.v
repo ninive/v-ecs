@@ -50,7 +50,8 @@ fn (mut app App) context() {
 
 	app.entities[0].remove_components_from_entity([app.p_position])
 	
-	/* quick test */
+	/* quick tests */
+	assert app.entities[1].remove_components_from_entity([app.p_position]) == true
 	assert app.entities[2].get_component(app.rect_s).data['width'] == 64
 
 	/* Destroy an entity */
@@ -60,7 +61,7 @@ fn (mut app App) context() {
 	// println(app.entities[2].get_component(rr1))
 
 	/* Get data from component */
-	// println(entities[2].get_component(rr1).data['width'])
+	// println(app.entities[2].get_component(rr1).data['width'])
 
 }
 
