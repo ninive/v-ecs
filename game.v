@@ -3,6 +3,15 @@ module main
 // import time
 import ecs
 
+enum Type {
+  c_none
+  rectangle
+  circle
+  position
+  imagesrc
+  identity
+}
+
 struct App {
 mut:
 	c				ecs.Component
@@ -23,11 +32,11 @@ fn (mut app App) context() {
 	app.e = ecs.Entity{}
 	app.s = ecs.System{}
 
-	app.rect_s = app.c.create_component({'width':f64(64),'height':f64(32)}, {'':''})
-	app.circle_s = app.c.create_component({'radius':f64(5)}, {'':''})
-	app.p_position = app.c.create_component({'x':f64(64),'y':f64(32)}, {'':''})
-	app.avatar = app.c.create_component({'width':f64(64),'height':f64(64)}, {'src':'./avatar.png'})
-	app.identity = app.c.create_component({'':f64(0)}, {'name': 'Ninive', 'type': 'player'})
+	app.rect_s = app.c.create_component(Type.rectangle, {'width':f64(64),'height':f64(32)}, {'':''})
+	app.circle_s = app.c.create_component(Type.circle, {'radius':f64(5)}, {'':''})
+	app.p_position = app.c.create_component(Type.position, {'x':f64(64),'y':f64(32)}, {'':''})
+	app.avatar = app.c.create_component(Type.imagesrc, {'width':f64(64),'height':f64(64)}, {'src':'./avatar.png'})
+	app.identity = app.c.create_component(Type.identity, {'':f64(0)}, {'name': 'Ninive', 'type': 'player'})
 
 	app.entities = []ecs.Entity{}
 
@@ -38,6 +47,8 @@ fn (mut app App) context() {
 	app.entities[0].add_components_to_entity([app.circle_s, app.p_position])
 	app.entities[1].add_components_to_entity([app.rect_s, app.p_position])
 	app.entities[2].add_components_to_entity([app.rect_s, app.p_position, app.avatar, app.identity]) // Player Entity
+
+	app.entities[0].remove_components_from_entity([app.p_position])
 	
 	/* quick test */
 	assert app.entities[2].get_component(app.rect_s).data['width'] == 64
@@ -59,7 +70,7 @@ fn (mut app App) update() {
 	app.s.run('renderer', app.render, [], {'':f64(0)}, {'':''})
 	
 	/* Physics for the velocity System example/milestone_reaching design */
-	// app.s.run('movement', app.movement, [app.p_position, app.AI], {'speed':f64(8),'angle':f64(54)}, {'':''})
+	// app.s.run('movement', app.movement, [app.position, app.AI], {'speed':f64(8),'angle':f64(54)}, {'':''})
 }
 
 fn (mut app App) run() {

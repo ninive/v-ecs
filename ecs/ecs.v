@@ -4,12 +4,13 @@ import rand
 
 pub struct Component {
 pub mut:
-        data           map[string]f64
-        metadata       map[string]string
+        component_type          int
+        data                    map[string]f64
+        metadata                map[string]string
 }
 
-pub fn (mut c Component) create_component(data map[string]f64, metadata map[string]string) Component {
-        mut component := Component{data, metadata}
+pub fn (mut c Component) create_component(component_type int, data map[string]f64, metadata map[string]string) Component {
+        mut component := Component{component_type, data, metadata}
         return component
 }
 
@@ -26,8 +27,19 @@ pub fn (mut e Entity) create_entity() Entity {
 }
 
 pub fn (mut e Entity) add_components_to_entity(components []Component) bool {
-        for i in components {
-                e.component_bucket << i
+        for c in components {
+                e.component_bucket << c
+        }
+        return true
+}
+
+pub fn (mut e Entity) remove_components_from_entity(components []Component) bool {
+        for k, beacon in e.component_bucket {
+                for _, component in components {
+                        if component.component_type == beacon.component_type {
+                                e.component_bucket.delete(k)
+                        }
+                }
         }
         return true
 }
